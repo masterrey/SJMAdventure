@@ -10,6 +10,8 @@ public class ControlPlayer : MonoBehaviour
     public GameObject aim;
     public GameObject aimspine;
     public Animator anim;
+
+    public GameObject weapon;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,7 @@ public class ControlPlayer : MonoBehaviour
     {
         movplayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
+        weapon.transform.forward = aim.transform.forward;
     }
 
 
@@ -44,13 +47,17 @@ public class ControlPlayer : MonoBehaviour
 
         globMov = new Vector3(globMov.x*3, rdb.velocity.y, globMov.z*3); //remove o y do movimento
 
-        anim.SetFloat("Walk", locVelocity.z); //aplica o valor na animaçao
-        anim.SetFloat("SideWalk", locVelocity.x); 
+       
        
         rdb.velocity = globMov ; //modifica a velocidade da fisica
         float ang = Vector3.Dot(transform.forward, -aim.transform.right);
         transform.Rotate(transform.up,ang*5);
         aimspine.transform.rotation = aim.transform.rotation; //aplica a rotacao
+
+       
+
+        anim.SetFloat("Walk", locVelocity.z); //aplica o valor na animaçao
+        anim.SetFloat("SideWalk", locVelocity.x+ ang*2);
     }
 
     private void OnAnimatorIK(int layerIndex)
