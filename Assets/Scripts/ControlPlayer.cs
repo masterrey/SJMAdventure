@@ -12,6 +12,10 @@ public class ControlPlayer : MonoBehaviour
     public Animator anim;
 
     public GameObject weapon;
+
+    public delegate void WantToEnter();
+    public WantToEnter wantToEnter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,11 @@ public class ControlPlayer : MonoBehaviour
         movplayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         weapon.transform.forward = aim.transform.forward;
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            wantToEnter();
+        }
     }
 
 

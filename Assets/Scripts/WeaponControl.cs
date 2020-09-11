@@ -9,6 +9,7 @@ public class WeaponControl : MonoBehaviour
     public Animator anim;
     public AudioSource aud;
     public Light light;
+    public VisualEffect vfximpact;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,7 @@ public class WeaponControl : MonoBehaviour
         light.intensity = 5;
         if (Physics.Raycast(vfx.transform.position, vfx.transform.forward, out RaycastHit hit, 100))
         {
+            vfximpact.transform.position = hit.point;
             Rigidbody rdb = hit.collider.gameObject.GetComponent<Rigidbody>();
             if (rdb)
             {
@@ -49,6 +51,7 @@ public class WeaponControl : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.01f);
+        vfximpact.Play();
         light.intensity = 0;
         anim.SetBool("Shoot", false);
     }
