@@ -50,20 +50,25 @@ public class ControlPlayer : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            if(wantToEnter(out GameObject sterringWheel))
+            TryToEnter();
+        }
+    }
+
+    void TryToEnter()
+    {
+        if (wantToEnter(out GameObject sterringWheel))
+        {
+            Collider[] cols = GetComponentsInChildren<Collider>();
+            foreach (Collider col in cols)
             {
-                Collider[] cols = GetComponentsInChildren<Collider>();
-                foreach(Collider col in cols)
-                {
-                    col.enabled = false;
-                }
-                transform.rotation = Quaternion.identity;
-                onboard = true;
-                rdb.isKinematic = true;
-                anim.SetBool("Driving", true);
-                weapon.SetActive(false);
-                stwh = sterringWheel;
+                col.enabled = false;
             }
+            transform.rotation = Quaternion.identity;
+            onboard = true;
+            rdb.isKinematic = true;
+            anim.SetBool("Driving", true);
+            weapon.SetActive(false);
+            stwh = sterringWheel;
         }
     }
 
