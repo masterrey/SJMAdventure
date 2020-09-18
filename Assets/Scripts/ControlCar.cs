@@ -13,6 +13,7 @@ public class ControlCar : MonoBehaviour
     public Rigidbody rdb;
     public bool onBoard = false;
     public GameObject sterringWheel;
+    public AudioSource aud;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,10 @@ public class ControlCar : MonoBehaviour
         movplayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         sterringWheel.transform.rotation = Quaternion.Euler(0, 0, movplayer.x * -90);
+
+
+        float motorrpm = 1 + Mathf.Abs(movplayer.z) / 100 + (rodaTD.rpm + rodaTE.rpm) / 50000;
+        aud.pitch = Mathf.Clamp(motorrpm, 1, 2f);
     }
     private void FixedUpdate()
     {

@@ -22,7 +22,7 @@ public class GetOnBoard : MonoBehaviour
         controlPlayer.gameObject.transform.localPosition = Vector3.zero;
        // controlPlayer.gameObject.gameObject.SetActive(false);
         controlCar.onBoard = true;
-        door.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        StartCoroutine("CloseDoor");
         controlPlayer.wantToEnter -= TryToBoard;
         SterringWheel = sterringWheel;
         return true;
@@ -33,7 +33,7 @@ public class GetOnBoard : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            door.transform.localRotation =Quaternion.Euler(0, 60, 0);
+            StartCoroutine("OpenDoor");
             controlPlayer = other.gameObject.GetComponentInParent<ControlPlayer>();
             controlPlayer.wantToEnter += TryToBoard;
         }
@@ -44,8 +44,41 @@ public class GetOnBoard : MonoBehaviour
         if (controlPlayer)
         {
             controlPlayer.wantToEnter -= TryToBoard;
-            door.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            StartCoroutine("CloseDoor");
             controlPlayer = null;
         }
+    }
+
+    IEnumerator OpenDoor()
+    {
+        bool wait=true;
+        float angDoor = 0;
+        while (wait)
+        {
+            yield return new WaitForFixedUpdate();
+            angDoor += Time.fixedDeltaTime*120;
+            door.transform.localRotation = Quaternion.Euler(0, angDoor, 0);
+            if (angDoor >= 60)
+            {
+                wait = false;
+            }
+        }
+    }
+
+    IEnumerator CloseDoor()
+    {
+        bool wait = true;
+        float angDoor = 60;
+        while (wait)
+        {
+            yield return new WaitForFixedUpdate();
+            angDoor -= Time.fixedDeltaTime * 240;
+            door.transform.localRotation = Quaternion.Euler(0, angDoor, 0);
+            if (angDoor <= 0.1f)
+            {
+                wait = false;
+            }
+        }
+        door.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 }
