@@ -10,13 +10,14 @@ public class ControlCar : MonoBehaviour
     public WheelCollider rodaTD;
     private Vector3 movplayer;
     public float motorTorque = 100;
-    Rigidbody rdb;
+    public Rigidbody rdb;
     public bool onBoard = false;
+    public GameObject sterringWheel;
     // Start is called before the first frame update
     void Start()
     {
-        rdb.GetComponent<Rigidbody>();
-        rdb.centerOfMass = rdb.centerOfMass - new Vector3(0, -0.5f, 0);
+      
+        rdb.centerOfMass -= new Vector3(0,0.5f, 0);
     }
 
     // Update is called once per frame
@@ -25,6 +26,7 @@ public class ControlCar : MonoBehaviour
         if(onBoard)
         movplayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
+        sterringWheel.transform.rotation = Quaternion.Euler(0, 0, movplayer.x * -90);
     }
     private void FixedUpdate()
     {

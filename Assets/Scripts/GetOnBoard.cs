@@ -7,21 +7,25 @@ public class GetOnBoard : MonoBehaviour
     public GameObject door;
     ControlPlayer controlPlayer;
     public ControlCar controlCar;
+    public GameObject seat;
+    public GameObject sterringWheel;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void TryToBoard()
+    public bool TryToBoard(out GameObject SterringWheel)
     {
         print("trying to board");
-        controlPlayer.gameObject.transform.parent = transform;
+        controlPlayer.gameObject.transform.parent = seat.transform;
         controlPlayer.gameObject.transform.localPosition = Vector3.zero;
-        controlPlayer.gameObject.gameObject.SetActive(false);
+       // controlPlayer.gameObject.gameObject.SetActive(false);
         controlCar.onBoard = true;
         door.transform.localRotation = Quaternion.Euler(0, 0, 0);
         controlPlayer.wantToEnter -= TryToBoard;
+        SterringWheel = sterringWheel;
+        return true;
     }
 
 

@@ -10,6 +10,7 @@ public class WeaponControl : MonoBehaviour
     public AudioSource aud;
     public Light light;
     public VisualEffect vfximpact;
+    public float bulletForce = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +47,7 @@ public class WeaponControl : MonoBehaviour
             if (rdb)
             {
                 //rdb.AddForce(vfx.transform.forward * 10, ForceMode.Impulse);
-                rdb.AddForceAtPosition(vfx.transform.forward * 10, hit.point, ForceMode.Impulse);
+                rdb.AddForceAtPosition(vfx.transform.forward * bulletForce, hit.point, ForceMode.Impulse);
             }
         }
 
