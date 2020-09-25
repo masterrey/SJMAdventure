@@ -63,7 +63,6 @@ public class ControlPlayer : MonoBehaviour
             {
                 col.enabled = false;
             }
-            transform.rotation = Quaternion.identity;
             onboard = true;
             rdb.isKinematic = true;
             anim.SetBool("Driving", true);

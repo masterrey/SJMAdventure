@@ -6,7 +6,8 @@ public class GetOnBoard : MonoBehaviour
 {
     public GameObject door;
     ControlPlayer controlPlayer;
-    public ControlCar controlCar;
+    [SerializeField]
+    internal ControlCar controlCar;
     public GameObject seat;
     public GameObject sterringWheel;
     // Start is called before the first frame update
@@ -20,12 +21,19 @@ public class GetOnBoard : MonoBehaviour
         print("trying to board");
         controlPlayer.gameObject.transform.parent = seat.transform;
         controlPlayer.gameObject.transform.localPosition = Vector3.zero;
-       // controlPlayer.gameObject.gameObject.SetActive(false);
-        controlCar.onBoard = true;
+        controlPlayer.gameObject.transform.localRotation = Quaternion.identity;
+        // controlPlayer.gameObject.gameObject.SetActive(false);
+        CallVehicleControl();
         StartCoroutine("CloseDoor");
         controlPlayer.wantToEnter -= TryToBoard;
         SterringWheel = sterringWheel;
         return true;
+    }
+
+    void CallVehicleControl()
+    {
+        if (controlCar)
+            controlCar.onBoard = true;
     }
 
 
