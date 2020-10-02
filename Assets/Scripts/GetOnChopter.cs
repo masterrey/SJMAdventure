@@ -5,11 +5,12 @@ using UnityEngine;
 public class GetOnChopter : GetOnBoard
 {
     [SerializeField]
-    ControlChopper controlChopper; 
-    void CallVehicleControl()
+    ControlChopper controlChopper;
+
+    public override void CallVehicleControl(bool onboard)
     {
         if (controlChopper)
-            controlChopper.onBoard = true;
+            controlChopper.onBoard = onboard;
     }
 
     IEnumerator OpenDoor()

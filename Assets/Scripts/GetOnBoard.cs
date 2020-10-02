@@ -23,17 +23,32 @@ public class GetOnBoard : MonoBehaviour
         controlPlayer.gameObject.transform.localPosition = Vector3.zero;
         controlPlayer.gameObject.transform.localRotation = Quaternion.identity;
         // controlPlayer.gameObject.gameObject.SetActive(false);
-        CallVehicleControl();
+        CallVehicleControl(true);
         StartCoroutine("CloseDoor");
         controlPlayer.wantToEnter -= TryToBoard;
         SterringWheel = sterringWheel;
+        controlPlayer.wantToExit += TryToOffBoard;
         return true;
     }
 
-    void CallVehicleControl()
+    public bool TryToOffBoard(out GameObject SterringWheel)
+    {
+        print("trying to Offboard");
+        controlPlayer.gameObject.transform.parent = null;
+        controlPlayer.gameObject.transform.position = transform.position + Vector3.left * 2;
+        controlPlayer.gameObject.transform.localRotation = Quaternion.identity;
+        CallVehicleControl(false);
+        StartCoroutine("OpenDoor");
+        controlPlayer.wantToExit -= TryToBoard;
+        SterringWheel = null;
+
+        return true;
+    }
+
+    public virtual void CallVehicleControl(bool onboard)
     {
         if (controlCar)
-            controlCar.onBoard = true;
+            controlCar.onBoard = onboard;
     }
 
 
@@ -53,7 +68,7 @@ public class GetOnBoard : MonoBehaviour
         {
             controlPlayer.wantToEnter -= TryToBoard;
             StartCoroutine("CloseDoor");
-            controlPlayer = null;
+            //controlPlayer = null;
         }
     }
 

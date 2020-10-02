@@ -13,8 +13,9 @@ public class ControlPlayer : MonoBehaviour
 
     public GameObject weapon;
 
-    public delegate bool WantToEnter(out GameObject obj);
-    public WantToEnter wantToEnter;
+    public delegate bool WantTo(out GameObject obj);
+    public WantTo wantToEnter;
+    public WantTo wantToExit;
     private bool onboard=false;
     GameObject stwh;
 
@@ -42,6 +43,10 @@ public class ControlPlayer : MonoBehaviour
     {
         if (onboard)
         {
+            if (Input.GetButtonDown("Fire2"))
+            {
+                TryToExit();
+            }
             return;
         }
         movplayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -71,8 +76,28 @@ public class ControlPlayer : MonoBehaviour
         }
     }
 
+    void TryToExit()
+    {
+        if (wantToExit(out GameObject sterringWheel))
+        {
+            Collider[] cols = GetComponentsInChildren<Collider>();
+            foreach (Collider col in cols)
+            {
+                col.enabled = true;
+            }
 
-    private void FixedUpdate()
+            onboard = false;
+            rdb.isKinematic = false;
+            anim.SetBool("Driving", false);
+            weapon.SetActive(true);
+            stwh = null;
+
+        }
+
+    }
+
+
+        private void FixedUpdate()
     {
        
         weapon.transform.forward = aim.transform.forward;
