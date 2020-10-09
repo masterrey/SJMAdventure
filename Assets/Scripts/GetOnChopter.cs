@@ -10,7 +10,11 @@ public class GetOnChopter : GetOnBoard
     public override void CallVehicleControl(bool onboard)
     {
         if (controlChopper)
+        {
             controlChopper.onBoard = onboard;
+            controlChopper.gameObject.transform.parent = null;
+            DontDestroyOnLoad(controlChopper.gameObject);
+        }
     }
 
     IEnumerator OpenDoor()

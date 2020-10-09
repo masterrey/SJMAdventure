@@ -28,6 +28,7 @@ public class GetOnBoard : MonoBehaviour
         controlPlayer.wantToEnter -= TryToBoard;
         SterringWheel = sterringWheel;
         controlPlayer.wantToExit += TryToOffBoard;
+        
         return true;
     }
 
@@ -48,7 +49,11 @@ public class GetOnBoard : MonoBehaviour
     public virtual void CallVehicleControl(bool onboard)
     {
         if (controlCar)
+        {
             controlCar.onBoard = onboard;
+            controlCar.gameObject.transform.parent = null;
+            DontDestroyOnLoad(controlCar.gameObject);
+        }
     }
 
 

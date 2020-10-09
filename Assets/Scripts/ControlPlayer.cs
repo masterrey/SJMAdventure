@@ -73,6 +73,7 @@ public class ControlPlayer : MonoBehaviour
             anim.SetBool("Driving", true);
             weapon.SetActive(false);
             stwh = sterringWheel;
+
         }
     }
 
