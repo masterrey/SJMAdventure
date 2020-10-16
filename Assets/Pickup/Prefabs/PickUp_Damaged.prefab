@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 1039041971180126}
   - component: {fileID: 1039041971180122}
   - component: {fileID: 1039041971180124}
+  - component: {fileID: 4158087186285910985}
   m_Layer: 0
   m_Name: PickUp_Damaged
   m_TagString: Untagged
@@ -347,6 +348,22 @@ MonoBehaviour:
   controlCar: {fileID: 1039041971180122}
   seat: {fileID: 254565069}
   sterringWheel: {fileID: 1626658843361888}
+--- !u!208 &4158087186285910985
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039041537112898}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.58, y: 0.71, z: 2.68}
+  m_MoveThreshold: 0.21
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.65, z: 0}
+  m_TimeToStationary: 0.59
 --- !u!1 &1052111476793010
 GameObject:
   m_ObjectHideFlags: 0
