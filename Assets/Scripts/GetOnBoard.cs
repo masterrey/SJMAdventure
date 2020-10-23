@@ -36,7 +36,7 @@ public class GetOnBoard : MonoBehaviour
     {
         print("trying to Offboard");
         controlPlayer.gameObject.transform.parent = null;
-        controlPlayer.gameObject.transform.position = transform.position + Vector3.left * 2;
+        controlPlayer.gameObject.transform.position = transform.position + transform.right * -2;
         controlPlayer.gameObject.transform.localRotation = Quaternion.identity;
         CallVehicleControl(false);
         StartCoroutine("OpenDoor");

@@ -327,7 +327,7 @@ MonoBehaviour:
   rodaDD: {fileID: 1846086330056585120}
   rodaTE: {fileID: 7103605370898413487}
   rodaTD: {fileID: 3495231853888062428}
-  motorTorque: 2000
+  motorTorque: 1000
   rdb: {fileID: 1162155587}
   onBoard: 0
   sterringWheel: {fileID: 1626658843361888}
