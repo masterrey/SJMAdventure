@@ -9,7 +9,10 @@ public class WheelControl : MonoBehaviour
     
     void Start()
     {
+        if(!wheelCollider)
         wheelCollider = GetComponent<WheelCollider>();
+        if (!meshWheel)
+            meshWheel = transform.GetChild(0).gameObject;
         
     }
 

@@ -16,7 +16,9 @@ public class RespawnCar : MonoBehaviour
         {
             if (other.CompareTag("PlayerRadar"))
             {
+
                 Instancecar = Instantiate(Prefabcar, transform.position, transform.rotation);
+                Instancecar.transform.parent = transform;
             }
         }
 
