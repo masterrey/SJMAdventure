@@ -41,6 +41,9 @@ public class ControlPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (HudManager.Paused())
+            return;
+
         if (onboard)
         {
             if (Input.GetButtonDown("Fire2"))

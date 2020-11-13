@@ -14,13 +14,15 @@ public class WeaponControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
+        if (HudManager.Paused())
+            return;
 
         if (Input.GetButtonDown("Fire1"))
         {
